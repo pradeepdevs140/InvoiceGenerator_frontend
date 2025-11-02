@@ -12,7 +12,6 @@ const MainPage = () => {
 
   const handleTemplateCLick = (templateid) => {
     setSelectedTemplate(templateid);
-    
     console.log("Selected template:", templateid);
     navigate('/preview');
   }

@@ -35,48 +35,83 @@ const PreviewPage = () => {
   return (
     <div className="preview-page">
       {/* Template Selection Buttons */}
-      <div className="template-selection">
-        <h2>Invoice Preview</h2>
-        <div className="template-buttons">
-          {templates.map(({ id, label }) => (
-            <button
-              key={id}
-              className={selectedTemplate === id ? 'active' : ''}
-              onClick={() => setSelectedTemplate(id)}
-            >
-              {label}
-            </button>
-          ))}
+    <div className="row mb-4">
+          <div className="col-12">
+            <div className="card border-0 shadow-sm">
+              <div className="card-body p-4">
+                <h2 className="card-title mb-4 text-primary fw-bold">Invoice Preview</h2>
+                <div className="d-flex flex-wrap gap-2">
+                  {templates.map(({ id, label }) => (
+                    <button
+                      key={id}
+                      className={`btn ${selectedTemplate === id ? 'btn-primary' : 'btn-outline-primary'} px-4 py-2`}
+                      onClick={() => setSelectedTemplate(id)}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       
       {/* Invoice Preview */}
-      <div className="invoice-preview-wrapper">
-        <InvoicePreview 
-          ref={previewRef}
-          invoicedata={Invoicedata}
-          template={selectedTemplate}
-        />
-      </div>
+      <div className="row mb-4">
+          <div className="col-12">
+            <div className="card border-0 shadow-sm">
+              <div className="card-body p-0">
+                <InvoicePreview 
+                  ref={previewRef}
+                  invoicedata={Invoicedata}
+                  template={selectedTemplate}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       
       {/* Action Buttons */}
-      <div className="action-buttons">
-        <button onClick={handleDownloadPDF} className="btn-primary">
-          📥 Download PDF
-        </button>
-        <button onClick={handleEdit} className="btn-secondary">
-          ✏️ Edit Invoice
-        </button>
-        <button onClick={handleSave} className="btn-secondary">
-          💾 Save Invoice
-        </button>
-        <button onClick={handleSendEmail} className="btn-secondary">
-          📧 Send Email
-        </button>
-        <button onClick={handleDelete} className="btn-danger">
-          🗑️ Delete
-        </button>
-      </div>
+      <div className="row">
+          <div className="col-12">
+            <div className="card border-0 shadow-sm">
+              <div className="card-body p-4">
+                <div className="d-flex flex-wrap justify-content-center gap-3">
+                  <button 
+                    onClick={handleDownloadPDF} 
+                    className="btn btn-primary btn-lg px-4 py-2"
+                  >
+                    📥 Download PDF
+                  </button>
+                  <button 
+                    onClick={handleEdit} 
+                    className="btn btn-secondary btn-lg px-4 py-2"
+                  >
+                    ✏️ Edit Invoice
+                  </button>
+                  <button 
+                    onClick={handleSave} 
+                    className="btn btn-secondary btn-lg px-4 py-2"
+                  >
+                    💾 Save Invoice
+                  </button>
+                  <button 
+                    onClick={handleSendEmail} 
+                    className="btn btn-secondary btn-lg px-4 py-2"
+                  >
+                    📧 Send Email
+                  </button>
+                  <button 
+                    onClick={handleDelete} 
+                    className="btn btn-danger btn-lg px-4 py-2"
+                  >
+                    🗑️ Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   );
 };

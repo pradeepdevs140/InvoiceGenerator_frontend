@@ -14,9 +14,18 @@ export const formatInvoiceData = (invoiceData) => {
 
   const currencySymbol = "₹";
 
+  // Format items with numeric conversions
+  const formattedItems = items.map(item => ({
+    ...item,
+    quantity: Number(item.quantity) || 0,
+    rate: Number(item.rate) || 0,
+    total: Number(item.total) || 0,
+    amount: Number(item.total) || 0  // Add amount property mapped to total
+  }));
+
   // Calculate totals
-  const subtotal = items.reduce((sum, item) => sum + (item.total || 0), 0);
-  const taxAmount = (subtotal * tax) / 100;
+  const subtotal = formattedItems.reduce((sum, item) => sum + (item.total || 0), 0);
+  const taxAmount = (subtotal * Number(tax)) / 100;
   const grandTotal = subtotal + taxAmount;
 
   return {
@@ -46,19 +55,19 @@ export const formatInvoiceData = (invoiceData) => {
       phone: shipping.phone || '',
       address: shipping.address || ''
     },
-    tax,
+    tax: Number(tax) || 0,
     notes,
     logo,
-    items,
+    items: formattedItems,
     currencySymbol,
-    subtotal,
-    taxAmount,
-    grandTotal
+    subtotal: Number(subtotal) || 0,
+    taxAmount: Number(taxAmount) || 0,
+    grandTotal: Number(grandTotal) || 0
   };
 };
 
 export const formatCurrency = (amount, symbol = '₹') => {
-  return `${symbol}${amount.toFixed(2)}`;
+  return `${symbol}${Number(amount).toFixed(2)}`;
 };
 
 export const formatDate = (dateString) => {
