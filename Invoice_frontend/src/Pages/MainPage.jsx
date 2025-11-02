@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Pencil } from 'lucide-react';
 import InvoiceForm from '../Components/InvoiceForm.jsx';
 import TemplateGrid from '../Components/TemplateGrid.jsx';
+import { AppContext } from '../Context/AppContext.jsx';
+import {useNavigate} from 'react-router-dom';
 const MainPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [invoiceTitle, setInvoiceTitle] = useState('INVOICE');
+  const navigate = useNavigate();
+  const { selectedTemplate, setSelectedTemplate } = useContext(AppContext);
 
+  const handleTemplateCLick = (templateid) => {
+    setSelectedTemplate(templateid);
+    
+    console.log("Selected template:", templateid);
+    navigate('/preview');
+  }
+  
   return (
     <div className="container-fluid bg-light min-vh-100 py-4">
       <div className="container">
@@ -53,7 +64,7 @@ const MainPage = () => {
                 <h5 className="card-title fw-bold mb-4 text-center text-primary">Template Preview</h5>
                 
                 <h6 className="fw-bold mb-3">Choose Template</h6>
-                <TemplateGrid />
+                <TemplateGrid onTemplateClick={handleTemplateCLick} />
                 
                 <hr className="my-4" />
                 
@@ -64,6 +75,9 @@ const MainPage = () => {
                   <h6 className="fw-bold mb-2">Invoice Preview</h6>
                   <p className="text-muted small mb-3">
                     Your invoice will appear here once you fill in the details
+                  </p>
+                  <p className="text-muted small mb-3">
+                    Selected Template: <strong>{selectedTemplate}</strong>
                   </p>
                   <button className="btn btn-primary w-100">
                     Generate Invoice

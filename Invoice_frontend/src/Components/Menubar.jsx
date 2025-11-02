@@ -29,7 +29,7 @@ const Menubar = () => {
                          <Link className="nav-link fw-medium " to ="/home">Home</Link>
                     </li>
                     <li className='nav-item'>
-                        <button className='nav-link fw-medium'> Generate</button>
+                        <Link className='nav-link fw-medium' to="/generate"> Generate</Link>
                     </li>
                     <li className='nav-item' >
                         <button className="btn btn-primary rounded-pill px-4">
