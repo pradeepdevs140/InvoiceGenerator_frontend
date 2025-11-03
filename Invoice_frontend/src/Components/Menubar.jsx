@@ -26,7 +26,7 @@ const Menubar = () => {
                         <Link className="nav-link fw-medium " to ="/dashboard">Dashboard</Link>
                     </li>
                     <li className='nav-item'>
-                         <Link className="nav-link fw-medium " to ="/home">Home</Link>
+                         <Link className="nav-link fw-medium " to ="/">Home</Link>
                     </li>
                     <li className='nav-item'>
                         <Link className='nav-link fw-medium' to="/generate"> Generate</Link>

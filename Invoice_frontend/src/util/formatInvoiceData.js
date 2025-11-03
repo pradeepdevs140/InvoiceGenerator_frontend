@@ -71,7 +71,7 @@ export const formatCurrency = (amount, symbol = '₹') => {
 };
 
 export const formatDate = (dateString) => {
-  if (!dateString) return '';
+  if (!dateString) return "N/A";
   const date = new Date(dateString);
   return date.toLocaleDateString('en-IN', { 
     year: 'numeric', 
@@ -79,3 +79,4 @@ export const formatDate = (dateString) => {
     day: 'numeric' 
   });
 };
+
