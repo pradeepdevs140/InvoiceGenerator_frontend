@@ -1,12 +1,18 @@
 import React from 'react'
-import logo from './logo';
+import { useClerk } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
+import Logo from './logo.jsx'
 const Menubar = () => {
+    const{openSignIn} =  useClerk();
+    const openLogin=()=>{
+        openSignIn({});
+    }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div className="container py-2">
             <Link className="navbar-brand a-flex align-items-center" to ="/">
-            <logo />
+            <Logo />
             <span className="fw-bolder fs-4 max-3" styling ={{letterSpacing:'-0.5' , color:'#0D6EFD82'}}>Quick INVOICE</span>
             </Link>
             <button className='navbar-toggler' type="button"
@@ -23,19 +29,26 @@ const Menubar = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className='navbar-nav ms-auto align-items-center'>
                     <li className='nav-item'>
-                        <Link className="nav-link fw-medium " to ="/dashboard">Dashboard</Link>
-                    </li>
-                    <li className='nav-item'>
                          <Link className="nav-link fw-medium " to ="/">Home</Link>
                     </li>
+                   <SignedIn >
+                     <li className='nav-item'>
+                        <Link className="nav-link fw-medium " to ="/dashboard">Dashboard</Link>
+                    </li>
+                    
                     <li className='nav-item'>
                         <Link className='nav-link fw-medium' to="/generate"> Generate</Link>
                     </li>
-                    <li className='nav-item' >
-                        <button className="btn btn-primary rounded-pill px-4">
+                    <UserButton />
+                   </SignedIn>
+                   <SignedOut>
+                     <li className='nav-item' >
+                        <button className="btn btn-primary rounded-pill px-4" onClick={openLogin}>
                             Login/Signup
                         </button>
                     </li>
+                   </SignedOut>
+                   
                 </ul>
             </div>
         </div>

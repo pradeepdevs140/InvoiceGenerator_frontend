@@ -1,9 +1,16 @@
-import React from 'react'
-import { assests } from '../assets/assests'
-const logo = () => {
-  return (
-    <img src={assests.logo}alt="logo"  height={48} width={48}/>
-  )
-}
+import React from 'react';
+import { assests } from '../assets/assests';
 
-export default logo
+const Logo = () => {
+  return (
+    <img
+      src={assests.logo}
+      alt="logo"
+      height={48}
+      width={48}
+      style={{ borderRadius: "50px" }}
+    />
+  );
+};
+
+export default Logo;

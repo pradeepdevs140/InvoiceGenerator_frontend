@@ -2,11 +2,11 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 export const generatePdfFromElement = async (
-  element: HTMLElement,
-  fileName: string = "invoice.pdf",
-  returnBlob: boolean = false
+  HTMLElement,  
+  fileName = "invoice.pdf",
+  returnBlob = false
 ) => {
-  const canvas = await html2canvas(element, {
+  const canvas = await html2canvas(HTMLElement, {  // Fixed: use HTMLElement instead of element
     scale: 2,
     useCORS: true,
     backgroundColor: "white",

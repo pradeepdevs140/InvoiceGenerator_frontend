@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import { AppContext }  from '../Context/AppContext';
 import {formatDate} from '../util/formatInvoiceData.js'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 const Dashboard = () => {
   const[invoices , setInvoices] = useState([]);
   const{baseURL , setInvoiceTitle,
@@ -19,11 +20,13 @@ const Dashboard = () => {
        } = useContext(AppContext);
 
       const navigate = useNavigate();
+      const {getToken} = useAuth();
   
   useEffect(()=>{
     const fetchInvoices = async()=>{
       try{
-        const response = await getAllInvoices(baseURL);
+        const token = getToken();
+        const response = await getAllInvoices(baseURL, token);
         setInvoices(response.data);
       }
       catch(error){
