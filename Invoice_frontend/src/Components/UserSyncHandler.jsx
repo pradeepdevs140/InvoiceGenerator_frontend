@@ -1,8 +1,8 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../Context/AppContext";
-import toast from "react-hot-toast";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const UserSyncHandler = () => {
   const [synced, setSynced] = useState(false);
@@ -16,28 +16,26 @@ const UserSyncHandler = () => {
 
       try {
         const token = await getToken();
-
-        const userData = {
+        const data = {
           clerkId: user.id,
-          email: user.primaryEmailAddress?.emailAddress,
+          email: user.primaryEmailAddress.emailAddress,
           firstName: user.firstName,
           lastName: user.lastName,
           photoUrl: user.imageUrl,
         };
 
-        await axios.post(`${baseURL}/user/sync`, userData, {
+        await axios.post(`${baseURL}/user/sync`, data, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         setSynced(true);
-      } catch (error) {
-        toast.error("Failed to sync user data.");
-        console.error("User sync error:", error);
+      } catch {
+        toast.error("User sync failed");
       }
     };
 
     saveUser();
-  }, [isLoaded, isSignedIn, user, synced, getToken, baseURL]);
+  }, [isLoaded, isSignedIn, synced, user, getToken, baseURL]);
 
   return null;
 };

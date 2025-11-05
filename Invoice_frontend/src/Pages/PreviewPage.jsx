@@ -47,7 +47,7 @@ const PreviewPage = () => {
     if (!window.confirm('Are you sure you want to delete this invoice?')) return;
 
     try {
-      const token = await getToken();
+     const token = await getToken({ template: "default" });
       await deleteInvoice(baseURL, Invoicedata.id, token);
       toast.success("Invoice deleted successfully");
       navigate('/dashboard');
@@ -79,7 +79,7 @@ const PreviewPage = () => {
       formData.append("file", pdfBlob, `invoice_${Date.now()}.pdf`);
       formData.append("email", customerEmail);
 
-      const token = await getToken();
+      const token = await getToken({ template: "default" });
       const response = await sendinvoice(baseURL, formData, token);
 
       if (response.status === 200) {
@@ -117,7 +117,7 @@ const PreviewPage = () => {
         template: selectedTemplate
       };
 
-      const token = await getToken();
+      const token = await getToken({ template: "default" });
       const response = await saveInvoice(baseURL, payload, token);
 
       if (response.status === 200) {
